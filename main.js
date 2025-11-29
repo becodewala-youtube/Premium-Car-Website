@@ -175,6 +175,8 @@ function updateStats() {
 }
 
 function animateCounter(element, target) {
+  target = Number(target); // <-- FIX
+
   const duration = 1500;
   const start = 0;
   const increment = target / (duration / 16);
@@ -183,13 +185,16 @@ function animateCounter(element, target) {
   const timer = setInterval(() => {
     current += increment;
     if (current >= target) {
-      element.textContent = target % 1 === 0 ? Math.round(target) : target.toFixed(1);
+      element.textContent =
+        target % 1 === 0 ? Math.round(target) : target.toFixed(1);
       clearInterval(timer);
     } else {
-      element.textContent = current % 1 === 0 ? Math.round(current) : current.toFixed(1);
+      element.textContent =
+        current % 1 === 0 ? Math.round(current) : current.toFixed(1);
     }
   }, 16);
 }
+
 
 const statsObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
